@@ -1,3 +1,7 @@
 language: node_js
 node_js:
   - 12
+deploy:
+  provider: heroku
+  api_key: 358bedc4-6b4e-4bd1-845a-f77aa2664342
+  app: api-desi-figo
