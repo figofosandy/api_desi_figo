@@ -1,9 +1,9 @@
 const { rootHandler } = require('../handler')
 
 const root = {
-    method: 'GET',
-    path: '/',
-    handler: rootHandler
+  method: 'GET',
+  path: '/',
+  handler: rootHandler
 }
 
 module.exports = [root]
