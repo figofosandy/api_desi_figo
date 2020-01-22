@@ -1,9 +1,13 @@
 {
     "development": {
+        "mongoServer": "mongodb://localhost/buy_it",
         "port": 8080
     },
     "test": {
+        "mongoServer": "mongodb+srv://admin:admin@cluster0-gkszh.mongodb.net/test?retryWrites=true&w=majority",
         "port": 8000
     },
-    "production": {}
+    "production": {
+        "mongoServer": "mongodb+srv://admin:admin@cluster0-gkszh.mongodb.net/buy_it?retryWrites=true&w=majority"
+    }
 }

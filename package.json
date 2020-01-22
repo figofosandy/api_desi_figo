@@ -19,9 +19,11 @@
   },
   "homepage": "https://github.com/figofosandy/api_desi_figo#readme",
   "dependencies": {
+    "@hapi/boom": "^9.0.0",
     "@hapi/code": "^8.0.1",
     "@hapi/hapi": "^19.0.5",
     "@hapi/lab": "^22.0.3",
-    "dotenv": "^8.2.0"
+    "dotenv": "^8.2.0",
+    "mongoose": "^5.8.9"
   }
 }
