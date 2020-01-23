@@ -4,7 +4,7 @@
   "description": "��#\u0000 \u0000a\u0000p\u0000i\u0000_\u0000d\u0000e\u0000s\u0000i\u0000_\u0000f\u0000i\u0000g\u0000o\u0000\r\u0000 \u0000",
   "main": "index.js",
   "scripts": {
-    "test": "lab -v -m 5000 -l",
+    "test": "lab -v -m 10000 -l",
     "start": "node index.js",
     "dev": "nodemon index.js"
   },
@@ -24,6 +24,7 @@
     "@hapi/hapi": "^19.0.5",
     "@hapi/lab": "^22.0.3",
     "dotenv": "^8.2.0",
-    "mongoose": "^5.8.9"
+    "mongoose": "^5.8.9",
+    "socket.io": "^2.3.0"
   }
 }

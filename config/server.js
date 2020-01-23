@@ -16,6 +16,12 @@ const init = async () => {
 
   server.route(routes)
 
+  const io = require('socket.io')(server.listener)
+
+  server.method('emit', (event, data) => {
+    io.emit(event, data)
+  }, {})
+
   await server.start()
 
   process.on('unhandledRejection', (err) => {

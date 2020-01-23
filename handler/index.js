@@ -32,8 +32,9 @@ const errorHandler = (err) => {
   return Boom.boomify(err, detail)
 }
 
-const loginRequestHandler = (h, res) => {
+const loginRequestHandler = (request, h, res) => {
   if (!res) {
+    request.server.methods.emit('loginFailed', request.payload.email)
     return Boom.notFound('No User Found')
   }
   return h.response(res).code(202)
@@ -42,14 +43,17 @@ const loginRequestHandler = (h, res) => {
 const registerHandler = (request, h) => {
   const { payload } = request
   return User.create(payload)
-    .then(res => h.response(res).code(201))
+    .then(res => {
+      request.server.methods.emit('registerSuccess', payload.email)
+      return h.response(res).code(201)
+    })
     .catch(errorHandler)
 }
 
 const loginHandler = (request, h) => {
   const { payload } = request
   return User.findOne(payload)
-    .then(res => loginRequestHandler(h, res))
+    .then(res => loginRequestHandler(request, h, res))
     .catch(errorHandler)
 }
 
