@@ -14,6 +14,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Username is required'],
     unique: true
+  },
+  balance: {
+    type: Number,
+    default: () => Math.floor(Math.random() * 100)
   }
 })
 
