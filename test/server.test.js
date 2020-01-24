@@ -53,6 +53,15 @@ describe('Test Api Services', () => {
     expect(res.statusCode).to.equal(200)
   })
 
+  it('Check connected', async () => {
+    const res = await server.inject({
+      method: 'GET',
+      url: '/v1/checkConnected/I'
+    })
+    expect(res.statusCode).to.equal(200)
+    expect(res.result).to.equal('I is connected')
+  })
+
   it('responds "/register" with valid email and username', async () => {
     const username = `sample${Date.now()}`
     const email = `${username}@mail.com`

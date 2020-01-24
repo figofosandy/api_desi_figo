@@ -1,4 +1,4 @@
-const { rootHandler, loginHandler, registerHandler, getUserHandler } = require('../handler')
+const { rootHandler, loginHandler, registerHandler, getUserHandler, checkConnectedHandler } = require('../handler')
 
 const root = {
   method: 'GET',
@@ -24,4 +24,10 @@ const getAllUser = {
   handler: getUserHandler
 }
 
-module.exports = [root, login, register, getAllUser]
+const checkConnected = {
+  method: 'GET',
+  path: '/v1/checkConnected/{id}',
+  handler: checkConnectedHandler
+}
+
+module.exports = [root, login, register, getAllUser, checkConnected]

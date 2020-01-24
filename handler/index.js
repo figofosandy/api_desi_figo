@@ -65,4 +65,8 @@ const getUserHandler = async (request, h) => {
     .catch(errorHandler)
 }
 
-module.exports = { rootHandler, registerHandler, loginHandler, getUserHandler }
+const checkConnectedHandler = async (request, h) => {
+  return h.response(`${request.params.id} is connected`).code(200)
+}
+
+module.exports = { rootHandler, registerHandler, loginHandler, getUserHandler, checkConnectedHandler }
