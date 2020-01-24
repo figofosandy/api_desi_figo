@@ -59,4 +59,10 @@ const loginHandler = (request, h) => {
     .catch(errorHandler)
 }
 
-module.exports = { rootHandler, registerHandler, loginHandler }
+const getUserHandler = async (request, h) => {
+  return User.find({}, { email: 1, username: 1 })
+    .then(res => h.response(res).code(200))
+    .catch(errorHandler)
+}
+
+module.exports = { rootHandler, registerHandler, loginHandler, getUserHandler }

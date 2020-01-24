@@ -45,6 +45,14 @@ describe('Test Api Services', () => {
     expect(res.result).to.equal('Hello World')
   })
 
+  it('GetAllUser responds success', async () => {
+    const res = await server.inject({
+      method: 'GET',
+      url: '/v1/getAllUser'
+    })
+    expect(res.statusCode).to.equal(200)
+  })
+
   it('responds "/register" with valid email and username', async () => {
     const username = `sample${Date.now()}`
     const email = `${username}@mail.com`
