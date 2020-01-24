@@ -33,11 +33,12 @@ const errorHandler = (err) => {
 }
 
 const loginRequestHandler = (request, h, res) => {
+  const data = res || request.payload.email || request.payload.username
   if (!res) {
-    request.server.methods.emit('loginFailed', res)
+    request.server.methods.emit('loginFailed', data)
     return Boom.notFound('No User Found')
   }
-  request.server.methods.emit('loginSuccess', res)
+  request.server.methods.emit('loginSuccess', data)
   return h.response(res).code(202)
 }
 
