@@ -34,9 +34,10 @@ const errorHandler = (err) => {
 
 const loginRequestHandler = (request, h, res) => {
   if (!res) {
-    request.server.methods.emit('loginFailed', request.payload.email)
+    request.server.methods.emit('loginFailed', request.payload.email || request.payload.username)
     return Boom.notFound('No User Found')
   }
+  request.server.methods.emit('loginSuccess', request.payload.email || request.payload.username)
   return h.response(res).code(202)
 }
 
