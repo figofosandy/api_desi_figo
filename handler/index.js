@@ -5,8 +5,9 @@ const db = mongoose.connection
 db.on('error', console.error.bind(console, 'connection error'))
 db.once('open', () => console.log('Connected'))
 
-const { userSchema } = require('../config/mongooseSchema')
+const { userSchema, productSchema } = require('../config/mongooseSchema')
 const User = mongoose.model('User', userSchema)
+const Product = mongoose.model('Product', productSchema)
 
 const rootHandler = (request, h) => {
   return h.response('Hello World').code(200)
@@ -69,4 +70,10 @@ const checkConnectedHandler = async (request, h) => {
   return h.response(`${request.params.id} is connected`).code(200)
 }
 
-module.exports = { rootHandler, registerHandler, loginHandler, getUserHandler, checkConnectedHandler }
+const getProductsHandler = async (request, h) => {
+  return Product.find()
+    .then(res => h.response(res).code(200))
+    .catch(errorHandler)
+}
+
+module.exports = { rootHandler, registerHandler, loginHandler, getUserHandler, checkConnectedHandler, getProductsHandler }

@@ -136,4 +136,20 @@ describe('Test Api Services', () => {
     expect(loginUsingUsername.statusCode).to.equal(404)
     expect(loginUsingEmail.statusCode).to.equal(404)
   })
+
+  it('Get product image', async () => {
+    const res = await server.inject({
+      method: 'GET',
+      url: '/v1/products/fanta.jpg'
+    })
+    expect(res.statusCode).to.equal(200)
+  })
+
+  it('Get All Products responds success', async () => {
+    const res = await server.inject({
+      method: 'GET',
+      url: '/v1/getAllProduct'
+    })
+    expect(res.statusCode).to.equal(200)
+  })
 })

@@ -14,6 +14,8 @@ const init = async () => {
     host: '0.0.0.0'
   })
 
+  await server.register(require('@hapi/inert'))
+
   server.route(routes)
 
   const io = require('socket.io')(server.listener)

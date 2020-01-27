@@ -1,4 +1,4 @@
-const { rootHandler, loginHandler, registerHandler, getUserHandler, checkConnectedHandler } = require('../handler')
+const { rootHandler, loginHandler, registerHandler, getUserHandler, checkConnectedHandler, getProductsHandler } = require('../handler')
 
 const root = {
   method: 'GET',
@@ -30,4 +30,21 @@ const checkConnected = {
   handler: checkConnectedHandler
 }
 
-module.exports = [root, login, register, getAllUser, checkConnected]
+const serveImageFiles = {
+  method: 'GET',
+  path: '/v1/products/{image*}',
+  handler: {
+    directory: {
+      path: 'public/image',
+      listing: true
+    }
+  }
+}
+
+const getAllProduct = {
+  method: 'GET',
+  path: '/v1/getAllProduct',
+  handler: getProductsHandler
+}
+
+module.exports = [root, login, register, getAllUser, checkConnected, serveImageFiles, getAllProduct]

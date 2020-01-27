@@ -21,4 +21,12 @@ const userSchema = new mongoose.Schema({
   }
 })
 
-module.exports = { userSchema }
+const productSchema = new mongoose.Schema({
+  name: String,
+  price: Number,
+  imageUri: String,
+  stock: Number,
+  category: String
+})
+
+module.exports = { userSchema, productSchema }
