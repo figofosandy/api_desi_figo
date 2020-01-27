@@ -140,7 +140,7 @@ describe('Test Api Services', () => {
   it('Get product image', async () => {
     const res = await server.inject({
       method: 'GET',
-      url: '/v1/products/fanta.jpg'
+      url: '/v1/products/mie_goreng.jpg'
     })
     expect(res.statusCode).to.equal(200)
   })
