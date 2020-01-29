@@ -1,6 +1,9 @@
 'use strict'
-
 const Hapi = require('@hapi/hapi')
+const Inert = require('@hapi/inert')
+const Vision = require('@hapi/vision')
+const HapiSwagger = require('hapi-swagger')
+const Pack = require('../package.json')
 
 require('dotenv').config()
 
@@ -14,7 +17,21 @@ const init = async () => {
     host: '0.0.0.0'
   })
 
-  await server.register(require('@hapi/inert'))
+  const swaggerOptions = {
+    info: {
+      title: 'Test API Documentation',
+      version: Pack.version
+    }
+  }
+
+  await server.register([
+    Inert,
+    Vision,
+    {
+      plugin: HapiSwagger,
+      options: swaggerOptions
+    }
+  ])
 
   server.route(routes)
 
