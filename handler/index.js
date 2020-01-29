@@ -47,7 +47,6 @@ const registerHandler = (request, h) => {
   const { payload } = request
   return User.create(payload)
     .then(res => {
-      console.log(res)
       request.server.methods.emit('registerSuccess', payload.email)
       return h.response(res).code(201)
     })
