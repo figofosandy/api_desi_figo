@@ -2,10 +2,10 @@ const { rootHandler, loginHandler, registerHandler, getUserHandler, checkConnect
 const Joi = require('@hapi/joi')
 
 const userDetailSchema = Joi.object({
-  _id: Joi.string(),
-  email: Joi.string().email(),
+  _id: Joi.any(),
+  email: Joi.string(),
   password: Joi.string(),
-  username: Joi.string().alphanum(),
+  username: Joi.string(),
   balance: Joi.number(),
   __v: Joi.number()
 }).label('User Detail')
@@ -85,7 +85,7 @@ const register = {
     },
     response: {
       status: {
-        202: userDetailSchema,
+        201: Joi.any(),
         400: errorSchema,
         404: errorSchema,
         409: errorSchema

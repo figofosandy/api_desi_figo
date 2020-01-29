@@ -47,6 +47,7 @@ const registerHandler = (request, h) => {
   const { payload } = request
   return User.create(payload)
     .then(res => {
+      console.log(res)
       request.server.methods.emit('registerSuccess', payload.email)
       return h.response(res).code(201)
     })
@@ -55,13 +56,13 @@ const registerHandler = (request, h) => {
 
 const loginHandler = (request, h) => {
   const { payload } = request
-  return User.findOne(payload)
+  return User.findOne(payload).lean()
     .then(res => loginRequestHandler(request, h, res))
     .catch(errorHandler)
 }
 
 const getUserHandler = async (request, h) => {
-  return User.find({}, { email: 1, username: 1 })
+  return User.find({}, { email: 1, username: 1 }).lean()
     .then(res => h.response(res).code(200))
     .catch(errorHandler)
 }
