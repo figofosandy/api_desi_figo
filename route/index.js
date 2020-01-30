@@ -1,4 +1,4 @@
-const { rootHandler, loginHandler, registerHandler, getUserHandler, checkConnectedHandler, getProductsHandler } = require('../handler')
+const { rootHandler, loginHandler, registerHandler, getUserHandler, checkConnectedHandler, getProductsHandler, getCartsHandler, addToCartHandler, addToWishListHandler } = require('../handler')
 const Joi = require('@hapi/joi')
 
 const userDetailSchema = Joi.object({
@@ -85,9 +85,8 @@ const register = {
     },
     response: {
       status: {
-        201: Joi.any(),
+        201: Joi.object(),
         400: errorSchema,
-        404: errorSchema,
         409: errorSchema
       }
     }
@@ -145,4 +144,68 @@ const getAllProduct = {
   }
 }
 
-module.exports = [root, login, register, getAllUser, checkConnected, serveImageFiles, getAllProduct]
+const getAllCart = {
+  method: 'GET',
+  path: '/v1/getAllCart',
+  options: {
+    handler: getCartsHandler,
+    description: 'Get All Cart',
+    notes: 'Get all cart list',
+    tags: ['api']
+  }
+}
+
+const addToCart = {
+  method: 'POST',
+  path: '/v1/addToCart',
+  options: {
+    handler: addToCartHandler,
+    description: 'Add To Cart',
+    notes: 'Add product to Card',
+    tags: ['api'],
+    validate: {
+      payload: Joi.object({
+        name: Joi.string().required().description('the product`s name'),
+        price: Joi.number().required().description('the product`s price'),
+        imageUri: Joi.string().required().description('the product`s imageUri'),
+        quantity: Joi.number().required().description('the product`s quantity'),
+        category: Joi.string().required().description('the product`s category'),
+        owner: Joi.string().required().description('the cart`s owner')
+      }).label('Add To Cart Payload')
+    },
+    response: {
+      status: {
+        201: Joi.object(),
+        400: errorSchema
+      }
+    }
+  }
+}
+
+const addToWishList = {
+  method: 'POST',
+  path: '/v1/addToWishList',
+  options: {
+    handler: addToWishListHandler,
+    description: 'Add To WishList',
+    notes: 'Add product to WishList',
+    tags: ['api'],
+    validate: {
+      payload: Joi.object({
+        name: Joi.string().required().description('the product`s name'),
+        price: Joi.number().required().description('the product`s price'),
+        imageUri: Joi.string().required().description('the product`s imageUri'),
+        category: Joi.string().required().description('the product`s category'),
+        owner: Joi.string().required().description('the cart`s owner')
+      }).label('Add To WishList Payload')
+    },
+    response: {
+      status: {
+        201: Joi.object(),
+        400: errorSchema
+      }
+    }
+  }
+}
+
+module.exports = [root, login, register, getAllUser, checkConnected, serveImageFiles, getAllProduct, getAllCart, addToCart, addToWishList]

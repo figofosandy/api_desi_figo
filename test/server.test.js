@@ -152,4 +152,67 @@ describe('Test Api Services', () => {
     })
     expect(res.statusCode).to.equal(200)
   })
+
+  it('Get All Carts responds success', async () => {
+    const res = await server.inject({
+      method: 'GET',
+      url: '/v1/getAllCart'
+    })
+    expect(res.statusCode).to.equal(200)
+  })
+
+  it('Add to Cart success', async () => {
+    const username = `sample${Date.now()}`
+    const email = `${username}@mail.com`
+    const password = 'password'
+    const payload = {
+      email,
+      username,
+      password
+    }
+    const detail = {
+      method: 'POST',
+      url: '/v1/addToCart',
+      payload: {
+        name: 'Flanel',
+        price: 13,
+        imageUri: 'baju_flanel.jpg',
+        quantity: 1,
+        category: 'clothes',
+        owner: username
+      }
+    }
+    await registerNewUser(server, payload)
+    const addToCart = await callingApi(server, detail)
+    expect(addToCart.statusCode).to.equal(201)
+    expect(addToCart.result.owner).to.equal(username)
+  })
+
+  it('Add to Wishlist success', async () => {
+    const timeStamp = Date.now()
+    const username = `sample${timeStamp}`
+    const email = `${username}@mail.com`
+    const password = 'password'
+    const payload = {
+      email,
+      username,
+      password
+    }
+    const detail = {
+      method: 'POST',
+      url: '/v1/addToWishList',
+      payload: {
+        name: `sample product ${timeStamp}`,
+        price: 7,
+        imageUri: `${timeStamp}.jpg`,
+        category: 'food_and_drink',
+        owner: username
+      }
+    }
+    await registerNewUser(server, payload)
+    const addToWishlist = await callingApi(server, detail)
+    expect(addToWishlist.statusCode).to.equal(201)
+    expect(addToWishlist.result.owner).to.equal(username)
+    expect(addToWishlist.result.status).to.equal('wishList')
+  })
 })

@@ -29,4 +29,14 @@ const productSchema = new mongoose.Schema({
   category: String
 })
 
-module.exports = { userSchema, productSchema }
+const cartSchema = new mongoose.Schema({
+  name: String,
+  price: Number,
+  imageUri: String,
+  quantity: Number,
+  category: String,
+  status: String,
+  owner: String
+})
+
+module.exports = { userSchema, productSchema, cartSchema }

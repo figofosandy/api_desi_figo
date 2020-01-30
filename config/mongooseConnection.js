@@ -11,7 +11,7 @@ mongoose.connect(config.mongoServer, {
   useFindAndModify: false
 })
 
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV === 'development') {
   mongoose.set('debug', true)
 }
 
