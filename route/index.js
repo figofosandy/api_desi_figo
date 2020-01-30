@@ -151,7 +151,13 @@ const getAllCart = {
     handler: getCartsHandler,
     description: 'Get All Cart',
     notes: 'Get all cart list',
-    tags: ['api']
+    tags: ['api'],
+    validate: {
+      params: Joi.object({
+        owner: Joi.string()
+          .description('for get all cart by owner')
+      })
+    }
   }
 }
 
