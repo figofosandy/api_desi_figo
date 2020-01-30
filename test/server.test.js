@@ -156,7 +156,7 @@ describe('Test Api Services', () => {
   it('Get All Carts responds success', async () => {
     const res = await server.inject({
       method: 'GET',
-      url: '/v1/getAllCart'
+      url: '/v1/getAllCart/sample'
     })
     expect(res.statusCode).to.equal(200)
   })

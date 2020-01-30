@@ -146,7 +146,7 @@ const getAllProduct = {
 
 const getAllCart = {
   method: 'GET',
-  path: '/v1/getAllCart',
+  path: '/v1/getAllCart/{owner}',
   options: {
     handler: getCartsHandler,
     description: 'Get All Cart',

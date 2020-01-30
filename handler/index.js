@@ -81,7 +81,7 @@ const getProductsHandler = async (request, h) => {
 }
 
 const getCartsHandler = async (request, h) => {
-  return Cart.find()
+  return Cart.find(request.params)
     .then(res => h.response(res).code(200))
     .catch(errorHandler)
 }
